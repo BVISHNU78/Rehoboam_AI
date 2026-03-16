@@ -1,44 +1,46 @@
 # Rehoboam_AI
-# Rehoboam_AI
 
 **Rehoboam_AI** is an AI-powered **Open Source Intelligence (OSINT) prediction system** designed to gather real-time intelligence from the open web and generate strategic insights, forecasts, and risk assessments.
 
-The system uses **SearXNG meta-search** to collect information from multiple sources and applies **AI models** to analyze global developments, identify emerging patterns, and produce predictive intelligence.
+The system uses **SearXNG meta-search** to collect information from multiple sources and analyzes it using **local AI models via Ollama**.
 
 ---
 
 # Overview
 
-Rehoboam_AI integrates several components to create an automated intelligence pipeline:
+Rehoboam_AI combines **OSINT data collection with local AI analysis** to create an automated intelligence pipeline.
 
-* **SearXNG** – Privacy-focused meta-search engine for OSINT collection
-* **AI / LLM Models** – Data analysis, summarization, and forecasting
-* **OSINT Collector** – Automated information gathering from web sources
-* **Prediction Engine** – Risk scoring and event forecasting
+Core technologies:
 
-The goal is to provide a **real-time intelligence platform** capable of monitoring global events and delivering actionable insights.
+* **SearXNG** – Meta-search engine for OSINT data collection
+* **Ollama** – Local AI model runtime
+* **LLM Models** – Event analysis, summarization, and forecasting
+* **OSINT Collector** – Automated intelligence gathering
+* **Prediction Engine** – Risk scoring and trend analysis
 
 ---
 
 # Features
 
 * 🌐 Multi-source OSINT data aggregation
-* 🔎 Real-time intelligence collection
-* 🧠 AI-driven event analysis and summarization
-* 📊 Risk scoring and predictive modeling
+* 🔎 Real-time intelligence gathering
+* 🧠 AI-powered event analysis
+* 📊 Risk scoring and predictive insights
 * 🔐 Privacy-friendly search via SearXNG
-* ⚙️ Modular architecture for AI agents
-* 🚀 Scalable and extensible design
+* 🖥️ Local AI processing using Ollama
+* ⚙️ Modular and extensible architecture
 
 ---
 
 # System Architecture
 
-```
+```id="m9ny3c"
 User / Analyst
       │
       ▼
-AI Prediction Engine
+Rehoboam_AI Engine
+      │
+      ├── AI Analysis (Ollama LLM)
       │
       ▼
 OSINT Data Collector
@@ -55,62 +57,131 @@ Open Web Sources
 
 # Why SearXNG
 
-SearXNG is used as the **core OSINT search layer** because it:
+SearXNG is used as the **OSINT search engine layer** because it:
 
 * Aggregates results from multiple search engines
 * Provides a powerful JSON API
 * Can be self-hosted
+* Supports automated data collection
 * Protects user privacy
-* Enables automated intelligence workflows
 
 Official repository:
+
 https://github.com/searxng/searxng
 
 ---
 
 # Installing SearXNG
 
-## 1. Install Docker
+## Install Docker
 
-```bash
+```bash id="a0zv51"
 sudo apt update
 sudo apt install docker.io docker-compose -y
 ```
 
 ---
 
-## 2. Clone SearXNG
+## Clone SearXNG
 
-```bash
+```bash id="p1q6ne"
 git clone https://github.com/searxng/searxng.git
 cd searxng
 ```
 
 ---
 
-## 3. Start SearXNG
+## Start SearXNG
 
-```bash
+```bash id="x1lqpl"
 docker compose up -d
 ```
 
-Default instance:
+Access the instance:
 
-```
+```id="azq2ft"
 http://localhost:8080
 ```
 
 ---
 
-# Testing the SearXNG API
+# Installing Ollama
+
+Ollama is used to run **local large language models** for intelligence analysis.
+
+## Install Ollama
+
+Linux / Mac:
+
+```bash id="7j9qak"
+curl -fsSL https://ollama.com/install.sh | sh
+```
+
+Check installation:
+
+```bash id="er2tf5"
+ollama --version
+```
+
+---
+
+# Download AI Models
+
+Example models:
+
+```bash id="9w8k3p"
+ollama pull llama3
+ollama pull mistral
+ollama pull phi3
+```
+
+Run a model:
+
+```bash id="s4t91g"
+ollama run llama3
+```
+
+---
+
+# Using Ollama with Python
+
+Example AI analysis module:
+
+```python id="48m8ok"
+import requests
+
+OLLAMA_URL = "http://localhost:11434/api/generate"
+
+def analyze_osint(text):
+
+    payload = {
+        "model": "llama3",
+        "prompt": f"Analyze the following intelligence report and identify risks:\n{text}",
+        "stream": False
+    }
+
+    response = requests.post(OLLAMA_URL, json=payload)
+    return response.json()["response"]
+
+
+report = "Military tensions increasing near disputed border regions."
+
+analysis = analyze_osint(report)
+
+print(analysis)
+```
+
+---
+
+# Using SearXNG for OSINT Search
 
 Example query:
 
-```
-http://localhost:8080/search?q=global+conflict&format=json
+```id="u6m3ze"
+http://localhost:8080/search?q=geopolitical+tension&format=json
 ```
 
-Example response fields:
+Returned fields:
 
 * title
 * url
@@ -120,59 +191,21 @@ Example response fields:
 
 ---
 
-# Example Python OSINT Collector
-
-```python
-import requests
-
-SEARX_URL = "http://localhost:8080/search"
-
-def osint_search(query):
-    params = {
-        "q": query,
-        "format": "json",
-        "language": "en"
-    }
-
-    response = requests.get(SEARX_URL, params=params)
-    data = response.json()
-
-    results = []
-
-    for r in data.get("results", []):
-        results.append({
-            "title": r["title"],
-            "url": r["url"],
-            "content": r["content"]
-        })
-
-    return results
-
-
-results = osint_search("geopolitical tension asia")
-
-for r in results[:5]:
-    print(r["title"])
-    print(r["url"])
-```
-
----
-
 # OSINT Intelligence Pipeline
 
 1. AI generates intelligence queries
 2. SearXNG collects search results
 3. Data extraction and filtering
-4. NLP analysis and summarization
+4. AI analysis via Ollama models
 5. Event classification
 6. Risk scoring
-7. Forecast generation
+7. Prediction generation
 
 ---
 
 # Example Intelligence Queries
 
-```
+```id="q82td4"
 cyber attack infrastructure
 military escalation europe
 political instability africa
@@ -181,37 +214,134 @@ economic sanctions impact
 ```
 
 ---
+# User Interface
+
+Rehoboam_AI includes a **custom graphical user interface built with Tkinter** for interacting with the OSINT intelligence system.
+
+The UI allows analysts to:
+
+* Enter intelligence search queries
+* Trigger OSINT collection from SearXNG
+* Run AI analysis using Ollama models
+* View summarized intelligence reports
+* Monitor predictions and risk assessments
+
+Tkinter was chosen because it:
+
+* Is lightweight and built into Python
+* Works on Linux, Windows, and macOS
+* Requires no additional web server
+* Enables rapid UI development
+
+---
+
+# Tkinter Interface Features
+
+The custom interface includes:
+
+* 🔎 OSINT search panel
+* 🧠 AI analysis button
+* 📊 Intelligence output viewer
+* 📜 Search result viewer
+* ⚙️ Model selection (Ollama)
+
+---
+
+# Example Tkinter UI Structure
+
+```python
+import tkinter as tk
+from tkinter import scrolledtext
+
+def run_analysis():
+    query = search_entry.get()
+    output_box.insert(tk.END, f"Running OSINT analysis for: {query}\n")
+
+root = tk.Tk()
+root.title("Rehoboam_AI")
+
+search_entry = tk.Entry(root, width=50)
+search_entry.pack()
+
+run_button = tk.Button(root, text="Analyze", command=run_analysis)
+run_button.pack()
+
+output_box = scrolledtext.ScrolledText(root, width=80, height=20)
+output_box.pack()
+
+root.mainloop()
+```
+
+---
+
+# Running the UI
+
+Start the Rehoboam_AI interface:
+
+```bash
+python main.py
+```
+
+The Tkinter dashboard will open and allow you to interact with the system.
+
+---
+
+# UI Workflow
+
+```
+User Input
+   │
+   ▼
+Tkinter Interface
+   │
+   ├── Query OSINT (SearXNG)
+   │
+   ├── AI Analysis (Ollama)
+   │
+   ▼
+Intelligence Results Display
+```
+
+---
+
+# Future UI Improvements
+
+Planned UI enhancements include:
+
+* Interactive dashboards
+* Risk visualization graphs
+* Intelligence timeline view
+* Dark mode interface
+* Export intelligence reports
 
 # Security Recommendations
 
-* Deploy behind **NGINX or Traefik reverse proxy**
+* Deploy behind **NGINX reverse proxy**
 * Implement **rate limiting**
-* Validate sources before scraping
-* Monitor API usage
-* Filter unreliable sources
+* Validate external sources
+* Monitor logs and API requests
+* Run AI models locally for privacy
 
 ---
 
 # Future Development
 
-Planned improvements include:
+Planned improvements:
 
 * Autonomous AI intelligence agents
 * Event clustering and timeline analysis
 * Geopolitical forecasting models
-* Real-time alerting system
-* Integration with **LangChain / LLM frameworks**
-* Geospatial intelligence visualization
+* Real-time alert system
+* Geospatial intelligence mapping
+* Multi-model AI analysis
 
 ---
 
 # Contributing
 
-Contributions are welcome.
-
 1. Fork the repository
-2. Create a feature branch
-3. Commit changes
+2. Create a new branch
+3. Commit your changes
 4. Submit a pull request
 
 ---
@@ -221,6 +351,3 @@ Contributions are welcome.
 This project is licensed under the **GNU General Public License v3.0 (GPL-3.0)**.
 
 You are free to use, modify, and distribute this software under the terms of the GPL-3.0 license.
-
-See the LICENSE file for details.
-
