@@ -1,6 +1,7 @@
 # Rehoboam_AI
 
-**Rehoboam_AI** is an AI-powered **Open Source Intelligence (OSINT) prediction system** designed to gather real-time intelligence from the open web and generate strategic insights, forecasts, and risk assessments.
+**Rehoboam_AI** is an AI-powered multi-source intelligence analyzer that collects real-time data from public web sources and uses large language models to generate structured insights, trend analysis, and risk signals. Designed to demonstrate how AI can assist in interpreting unstructured information for decision support.
+
 
 The system uses **SearXNG meta-search** to collect information from multiple sources and analyzes it using **local AI models via Ollama**.
 
