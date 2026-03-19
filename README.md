@@ -180,6 +180,8 @@ Example query:
 ```id="u6m3ze"
 http://localhost:8080/search?q=geopolitical+tension&format=json
 ```
+<img width="1920" height="1032" alt="Screenshot 2026-03-19 160939" src="https://github.com/user-attachments/assets/96cdcd95-1584-4cd7-b671-c0b696d14f7f" />
+
 
 Returned fields:
 
@@ -301,6 +303,8 @@ Tkinter Interface
    ▼
 Intelligence Results Display
 ```
+
+<img width="1920" height="1032" alt="Screenshot 2026-03-19 160823" src="https://github.com/user-attachments/assets/6f266ca8-7a82-46c6-b98e-8c40e50cd763" />
 
 ---
 
