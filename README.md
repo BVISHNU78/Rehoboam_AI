@@ -52,7 +52,7 @@ SearXNG Meta Search API
 Open Web Sources
 (News, Blogs, Forums, Public Data)
 ```
-
+https://ollama.com/library/qwen2.5:3b
 ---
 
 # Why SearXNG
