@@ -9,7 +9,7 @@ The system uses **SearXNG meta-search** to collect information from multiple sou
 
 # Overview
 
-Rehoboam_AI combines **OSINT data collection with local AI analysis** to create an automated intelligence pipeline.
+Rehoboam_AI combines ** data collection with local AI analysis** to create an automated intelligence pipeline.
 
 Core technologies:
 
