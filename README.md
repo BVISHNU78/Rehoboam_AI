@@ -413,6 +413,7 @@ podman restart searxng
 ```
 
 ---
+ 🔎 SearXNG — Privacy-Focused Meta Search Engine
 Overview
 
 SearXNG is an open-source, privacy-respecting meta search engine that aggregates results from multiple search providers without tracking users. It is a community-driven fork of the original Searx project, designed for better performance, maintainability, and extensibility.
