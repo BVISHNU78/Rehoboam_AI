@@ -350,6 +350,128 @@ Planned improvements:
 
 ---
 
+
+
+# 🐧 Running with Podman (Docker Alternative)
+
+This project is fully compatible with **Podman**, a daemon-less container engine.
+
+Podman can be used as a drop-in replacement for Docker on:
+
+* Linux
+* Windows (WSL2)
+* macOS
+
+---
+
+## 🚀 Run SearXNG using Podman
+
+```bash
+podman run -d \
+  --name searxng \
+  -p 8080:8080 \
+  docker.io/searxng/searxng
+```
+
+Open:
+
+```
+http://localhost:8080
+```
+
+---
+
+## 🤖 Enable Ollama Integration (Podman)
+
+Copy default configuration:
+
+```bash
+podman cp searxng:/etc/searxng .
+```
+
+Edit:
+
+```
+searxng/settings.yml
+```
+
+Add AI provider:
+
+```yaml
+ai:
+  enabled: true
+  provider: ollama
+  ollama:
+    url: http://host.containers.internal:11434
+    model: llama3
+```
+
+Restart container:
+
+```bash
+podman restart searxng
+```
+
+---
+
+## ⚠️ Podman on Windows (WSL Backend)
+
+When using Podman with WSL:
+
+* Access via `localhost`, not VM IP
+* Avoid mounting empty config directories
+* Use `host.containers.internal` to reach Ollama
+* Ensure Podman machine is running
+
+---
+
+## 🧰 Persistent Setup (Optional)
+
+```bash
+podman rm -f searxng
+
+podman run -d \
+  --name searxng \
+  -p 8080:8080 \
+  -v $(pwd)/searxng:/etc/searxng \
+  docker.io/searxng/searxng
+```
+
+---
+
+## ✅ Compatibility
+
+Podman CLI is compatible with Docker CLI.
+
+Most Docker commands in this README can be replaced:
+
+```
+docker → podman
+docker-compose → podman-compose
+```
+
+---
+
+## 📌 Verified Environment
+
+* Podman 4+
+* WSL2 (Windows)
+* Ubuntu / Arch Linux
+* Ollama local LLM
+* SearXNG latest container
+
+---
+
+## 🔒 Benefits of Podman
+
+* Rootless containers
+* No daemon
+* Better security model
+* Systemd integration
+* OCI compliant
+
+---
+
 # License
 
 This project is licensed under the **GNU General Public License v3.0 (GPL-3.0)**.
