@@ -413,6 +413,77 @@ podman restart searxng
 ```
 
 ---
+Overview
+
+SearXNG is an open-source, privacy-respecting meta search engine that aggregates results from multiple search providers without tracking users. It is a community-driven fork of the original Searx project, designed for better performance, maintainability, and extensibility.
+
+Key Features
+
+🔐 Privacy-first search (no tracking, no profiling)
+
+🌐 Aggregates results from multiple search engines
+
+⚙ Highly configurable and extensible
+
+🚀 Self-hostable (Docker / Podman / native)
+
+🤖 Supports AI integration (e.g., Ollama, OpenAI)
+
+🧩 Plugin-based architecture
+
+📡 Supports Tor / proxy routing
+
+How It Works
+
+User query → SearXNG → Multiple search engines → Aggregated results → Returned to user
+
+SearXNG acts as an intermediary, preventing search engines from identifying the user directly.
+
+Architecture Components
+
+Search engine connectors (Google, DuckDuckGo, Bing, etc.)
+
+Result aggregator & ranking system
+
+Web UI frontend
+
+Configurable settings engine
+
+Optional AI answer provider
+
+Use Cases
+
+Privacy-focused personal search engine
+
+AI-enhanced search (local LLM)
+
+Research aggregation tool
+
+Enterprise internal search
+
+Tor-based anonymous browsing
+
+Advantages
+
+No ads or tracking
+
+Full control over search configuration
+
+Open-source and community maintained
+
+Can be deployed locally or publicly
+
+Extensible with AI capabilities
+
+Typical Deployment Options
+
+Docker / Podman containers
+
+Reverse proxy (Nginx / Caddy)
+
+Cloud VPS hosting
+
+Local AI integration via Ollama
 
 ## ⚠️ Podman on Windows (WSL Backend)
 
